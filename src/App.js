@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import tasks from './data.js';
+import moment from 'moment';
 
-function App() {
+function formatDate(date) {
+  return date ? moment(date).format('MM/DD/YYYY') : '';
+}
+
+function App() {    
+  const taskItems = tasks.map((task) => (
+    <li key={task.id}>
+      <input type="checkbox" checked={task.done} />
+      {task.firstName} {task.lastName}, Active Date: {formatDate(task.activeDate)}, Retire Date: {formatDate(task.retireDate)}
+    </li>
+  ));
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ul>{taskItems}</ul>
+    </>
   );
 }
 
